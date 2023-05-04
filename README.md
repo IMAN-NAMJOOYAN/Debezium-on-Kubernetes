@@ -59,6 +59,21 @@ kubectl create -n debezium-example -f debezium-connector-mysql.yml
 Note: If the Kafka Connector could not recognize the username and password. To ensure that the connector works correctly, enter the username and password manually.
 ```
 **Verifying the Deployment --> Optional**
+```
+1- To verify the everything works fine, you can e.g. start watching mysql.inventory.customers Kafka topic:
+kubectl run -n debezium-example -it --rm --image=quay.io/debezium/tooling:1.2  --restart=Never watcher -- kcat -b debezium-cluster-kafka-bootstrap:9092 -C -o beginning -t mysql.inventory.customers
+
+Note: Show all topic, you can use this:
+kubectl exec -n debezium-example debezium-cluster-kafka-0 -c kafka -i -t -- bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+2- Connect to the MySQL database:
+
+kubectl run -n debezium-example -it --rm --image=mysql:8.0 --restart=Never --env MYSQL_ROOT_PASSWORD=debezium mysqlterm -- mysql -hmysql -P3306 -uroot -pdebezium
+
+3- Do some changes in the customers table:
+sql> update customers set first_name="Sally Marie" where id=1001;
+```
+
 
 
 
