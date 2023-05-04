@@ -1,5 +1,5 @@
 # Debezium-on-Kubernetes
-Running Debezium 2.2 on kubernetes, Using Mysql Connector:
+**Running Debezium 2.2 on kubernetes, Using Mysql Connector:**
 
 **LOM:**
 
