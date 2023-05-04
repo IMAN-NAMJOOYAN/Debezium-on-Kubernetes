@@ -33,8 +33,35 @@ kubectl wait kafka/debezium-cluster --for=condition=Ready --timeout=300s -n debe
 ```
 **Deploying a Data Source**
 ```
-1- As a data source, MySQL will be used in the following. Besides running a pod with MySQL, an appropriate service which will point to the pod with DB itself is needed. It can be created e.g. as follows:
+- As a data source, MySQL will be used in the following. Besides running a pod with MySQL, an appropriate service which will point to the pod with DB itself is needed. It can be created e.g. as follows:
 kubectl create -n debezium-example -f mysql-example.yml
+```
+**Deploying a Debezium Connector**
+```
+1- Create customize docker image for mysql kafka connector:
+- curl -O https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/2.2.0.Final/debezium-connector-mysql-2.2.0.Final-plugin.tar.gz
+- tar xzfv debezium-connector-mysql-2.2.0.Final-plugin.tar.gz
+- cat << EOF > Dockerfile 
+FROM quay.io/strimzi/kafka:latest-kafka-3.4.0
+USER root:root
+RUN mkdir -p /opt/kafka/plugins/debezium
+COPY ./debezium-connector-mysql/ /opt/kafka/plugins/debezium/
+USER 1001
+EOF
+- docker build . -t <Private Registry IP Address>/debezium/connect-mysql-debezium-3.4.0:v1
+- docker push <Private Registry IP Address>/debezium/connect-mysql-debezium-3.4.0:v1
+2- Creating Kafka Connect Cluster:
+kubectl create -n debezium-example -f debezium-connect-cluster.yml
+Note: <Private Registry IP Address> replace with docker private registry ip address.
+3- Creating a Debezium Connector:
+kubectl create -n debezium-example -f debezium-connector-mysql.yml
+
+Note: If the Kafka Connector could not recognize the username and password. To ensure that the connector works correctly, enter the username and password manually.
+```
+
+
+
+
 
 
 
