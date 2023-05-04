@@ -101,4 +101,4 @@ kubectl run -n debezium-example -it --rm --image=mysql:8.0 --restart=Never --env
 sql> update customers set first_name="Sally Marie" where id=1001;
 ```
 
-[^1] Refrence: https://debezium.io/documentation/reference/stable/operations/kubernetes.html
+[x] Refrence: https://debezium.io/documentation/reference/stable/operations/kubernetes.html
