@@ -3,12 +3,15 @@ Running Debezium 2.2 on kubernetes, Using Mysql Connector:
 
 **LOM:**
 
-- Kubernetes: Version 1.25.5
-- Kafka Docker Image: quay.io/strimzi/kafka:latest-kafka-3.4.0
-- Docker: Version 23.0.5 For Create Mysql Connector Image
-- Maven "debezium-connector-mysql": https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/2.2.0.Final/debezium-connector-mysql-2.2.0.Final-plugin.tar.gz
-- StorageClass: Longhorn
-- Private Docker Registry: NexusOSS or Harbor
+|TOOLS NAME | Version|
+|-----------|--------|
+|Kubernetes |1.25.5  |
+|Kafka Docker Image |quay.io/strimzi/kafka:latest-kafka-3.4.0 |
+|Docker |23.0.5  |
+|Maven "debezium-connector-mysql |1.25.5  |
+|Kubernetes |(https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/2.2.0.Final/debezium-connector-mysql-2.2.0.Final-plugin.tar.gz) |
+|StorageClass |Longhorn |
+|Private Docker Registry |NexusOSS or Harbor |
 
 **Prerequisites**
 ```
