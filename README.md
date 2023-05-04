@@ -58,6 +58,7 @@ kubectl create -n debezium-example -f debezium-connector-mysql.yml
 
 Note: If the Kafka Connector could not recognize the username and password. To ensure that the connector works correctly, enter the username and password manually.
 ```
+**Verifying the Deployment --> Optional**
 
 
 
